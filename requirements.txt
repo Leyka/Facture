@@ -1,0 +1,5 @@
+Flask
+Flask-SqlAlchemy
+Flask-WTF
+Flask-Script
+Jinja2
