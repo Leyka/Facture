@@ -20,10 +20,9 @@ class User(db.Model):
 class Invoice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   ref_number = db.Column(db.Integer, nullable=False)
-  user_id = db.Column(db.Integer, ForeignKey("User.id"), nullable=False)
-  created_at = db.Column(db.Date, default=datetime.date.now)
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+  created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
   def __init__(self, ref_number, user_id):
     self.ref_number = ref_number
     self.user_id = user_id
-

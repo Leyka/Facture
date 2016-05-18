@@ -1,5 +1,4 @@
 Flask
-Flask-SqlAlchemy
+Flask-SQLAlchemy
 Flask-WTF
 Flask-Script
-Jinja2
