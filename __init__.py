@@ -1,9 +1,13 @@
-import os.path
+import os
 from flask import Flask
+
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/facture.db'
-app.config['SECRET_KEY'] = 'r+18k$WXtn^43wv1^%'
+env = os.environ.get('FACTURE_ENV', 'dev')
+app.config.from_object('facture.config.%sConfig' % env.capitalize())
+
+#from models import *
+import facture.routes
 
 if __name__ == '__main__':
     app.run()
