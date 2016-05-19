@@ -6,4 +6,4 @@ coverage
 tag.py
 venv
 .idea/
-config.ini
+static/.webassets-cache/
