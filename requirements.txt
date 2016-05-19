@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 Flask-WTF
 Flask-Script
+Flask-Assets

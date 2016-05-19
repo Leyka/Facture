@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {% if title %}
-            <title>{{ title }} - Facture</title>
-        {% else %}
-            <title>Facture</title>
-        {% endif %}
-        <meta charset="utf-8">
-        <link href="{{ url_for('.static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+      <meta charset="utf-8">
+      {% if title %}
+          <title>{{ title }} - Facture</title>
+      {% else %}
+          <title>Facture</title>
+      {% endif %}
+      {# Import the assets from assets.py #}
+      {% assets "common_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+      {% endassets %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
     </head>
