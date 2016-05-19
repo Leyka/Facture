@@ -7,8 +7,8 @@ assets_env.register(
     'common_css',
     assets.Bundle(
         'sass/layout.sass',
-        filters='sass',
-        output='css/common.css'
+        filters=['sass', 'cssmin'],
+        output='css/public.css'
     )
 )
 
