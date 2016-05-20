@@ -1,13 +1,14 @@
 from flask.ext import assets
 from facture import app
+import os
 
 assets_env = assets.Environment(app)
 
 assets_env.register(
     'common_css',
     assets.Bundle(
-        'sass/layout.sass',
+        'sass/*.sass',
         filters=['sass', 'cssmin'],
-        output='css/public.css'
+        output='public/global.css'
     )
 )

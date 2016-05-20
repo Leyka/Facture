@@ -7,6 +7,7 @@
       {% else %}
           <title>Facture</title>
       {% endif %}
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
       {# Import the assets from assets.py #}
       {% assets "common_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
@@ -14,12 +15,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
+        <div class="wrapper">
+          <nav>
+            <section class="container">
+              <a href="#" class="navigation-title">Facture</a>
+              <ul class="navigation-list float-right">
+                <li class="navigation-item">
+                  <a href="#" class="navigation-link">Doc</a>
+                </li>
+                <li class="navigation-item">
+                  <a href="#" class="navigation-link">
+                    <span class="button button-outline">Login</span>
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </nav>
+          <section class="container">
+            {% block content %}
+            {% endblock %}
+          </section>
         </div>
     </body>
 </html>
