@@ -1,9 +1,6 @@
 *.pyc
 .DS_Store
-blog
 *.db
-coverage
-tag.py
 venv
 .idea/
 static/.webassets-cache/
