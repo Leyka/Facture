@@ -1,5 +1,7 @@
+import uuid
+
 class Config(object):
-    SECRET_KEY = 'r+18k$WXtn^43wv1^%7&?%$#DdBvok$'
+    SECRET_KEY = str(uuid.uuid4())
 
 class DevConfig(Config):
     DEBUG = True
