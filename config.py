@@ -11,3 +11,4 @@ class DevConfig(Config):
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///db/facture.db'
+    HOST='0.0.0.0'

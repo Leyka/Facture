@@ -6,3 +6,5 @@ Flask-Assets
 cssmin
 jsmin
 htmlmin
+libsass
+uwsgi
