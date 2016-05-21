@@ -8,12 +8,12 @@
           <title>Facture</title>
       {% endif %}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
       {# Import the assets from assets.py #}
       {% assets "common_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
       {% endassets %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     </head>
     <body>
         <div class="wrapper">
@@ -28,12 +28,7 @@
                   </a>
                 </li>
                 <li class="navigation-item">
-                  <a href="#" class="navigation-link">
-                    Sign up
-                  </a>
-                </li>
-                <li class="navigation-item">
-                  <a href="#" class="navigation-link">
+                  <a id="btn-login" href="#" class="navigation-link">
                     Log in
                   </a>
                 </li>
@@ -55,7 +50,13 @@
             {% block content %}
             {% endblock %}
           </section>
-
         </div>
+
+        {# Scripts #}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+        <script src="/static/vendor/sweetalert/sweetalert.min.js"></script>
+        {% assets "common_js" %}
+          <script src="{{ ASSET_URL }}"></script>
+        {% endassets %}
     </body>
 </html>

@@ -21,10 +21,11 @@ google = oauth.remote_app('google',
 
 @app.route('/')
 def index():
-    if 'google_token' in session:
-        me = google.get('people/~')
-        return jsonify(me.data)
-    return redirect(url_for('login'))
+    # if 'google_token' in session:
+    #     me = google.get('people/~')
+    #     return jsonify(me.data)
+    # return redirect(url_for('login'))
+    return render_template("home.html")
 
 @google.tokengetter
 def get_google_token(token=None):
