@@ -5,3 +5,4 @@ venv
 .idea/
 static/.webassets-cache/
 static/public/
+secrets.json

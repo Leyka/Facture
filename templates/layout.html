@@ -8,6 +8,7 @@
           <title>Facture</title>
       {% endif %}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
       {# Import the assets from assets.py #}
       {% assets "common_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
@@ -16,25 +17,45 @@
     </head>
     <body>
         <div class="wrapper">
+
           <nav>
             <section class="container">
-              <a href="#" class="navigation-title">Facture</a>
+              <a href="#" class="navigation-title">FACTURE</a>
               <ul class="navigation-list float-right">
                 <li class="navigation-item">
-                  <a href="#" class="navigation-link">Doc</a>
+                  <a href="#" class="navigation-link">
+                    About
+                  </a>
                 </li>
                 <li class="navigation-item">
                   <a href="#" class="navigation-link">
-                    <span class="button button-outline">Login</span>
+                    Sign up
+                  </a>
+                </li>
+                <li class="navigation-item">
+                  <a href="#" class="navigation-link">
+                    Log in
                   </a>
                 </li>
               </ul>
             </section>
           </nav>
+
+          <header>
+            <div class="container">
+              <h1>Facture</h1>
+              <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, soluta.
+              </p>
+              <a href="#" class="button button-google" title="Sign in with Google+"><i class="ion-social-googleplus"></i></a>
+            </div>
+          </header>
+
           <section class="container">
             {% block content %}
             {% endblock %}
           </section>
+
         </div>
     </body>
 </html>
