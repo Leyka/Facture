@@ -3,6 +3,7 @@ Flask-SQLAlchemy
 Flask-WTF
 Flask-Script
 Flask-Assets
+Flask-OAuthlib
 cssmin
 jsmin
 htmlmin
