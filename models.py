@@ -6,23 +6,46 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  password = db.Column(db.String)
-  fname = db.Column(db.String, nullable=False)
-  lname = db.Column(db.String, nullable=False)
+  social_id = db.Column(db.Integer, nullable=False)
+  first_name = db.Column(db.String, nullable=False)
+  last_name = db.Column(db.String, nullable=False)
   photo = db.Column(db.String)
+  organisations = db.relationship('Organisation', secondary=users_orgs,
+    backref=db.backref('users', lazy='dynamic'))
+  invoices = db.relationship('Invoice', backref='user',lazy='dynamic')
 
-  def __init__(self, email, first_name, last_name, photo):
+  def __init__(self, social_id, email, first_name, last_name, photo=None):
+    self.social_id = social_id
     self.email = email
-    self.fname = first_name
-    self.lname = last_name
-    self.photo = photo
+    self.first_name = first_name
+    self.last_name = last_name
+    if photo is not None:
+        self.photo = photo
 
 class Invoice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   ref_number = db.Column(db.Integer, nullable=False)
-  user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+  org_id = db.Column(db.Integer, db.ForeignKey('organisation.id'), nullable=False)
+  created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
-  def __init__(self, ref_number, user_id):
+  def __init__(self, ref_number, org_id, created_by):
     self.ref_number = ref_number
-    self.user_id = user_id
+    self.org_id = org_id
+    self.created_by = created_by
+
+class Organisation(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String, nullable=False)
+  invoices = db.relationship('Invoice', backref='organisation',lazy='dynamic')
+
+  def __init__(self, name):
+    self.name = name
+
+# Table: Users-Organisations
+# 1 User can belongs to many organisations
+# And 1 organisation can have many users
+users_orgs = db.Table('users_organisations',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('org_id', db.Integer, db.ForeignKey('organisation.id'))
+)
