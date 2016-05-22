@@ -7,47 +7,66 @@
       {% else %}
           <title>Facture</title>
       {% endif %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
-      {# Import the assets from assets.py #}
-      {% assets "common_css" %}
+      {% assets "lib_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
       {% endassets %}
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% assets "app_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+      {% endassets %}
       <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.3.0/hint.base.min.css">
+      <!-- <link rel="stylesheet" href="/static/vendor/sweetalert/sweetalert.css"> -->
     </head>
     <body>
         <div class="wrapper">
           <nav>
             <section class="container">
-              <a href="#" class="navigation-title">FACTURE</a>
+              <a href="#" class="navigation-title"><i class="ion-android-done-all"></i> FACTURE</a>
               <ul class="navigation-list float-right">
                 <li class="navigation-item">
                   <a href="#" class="navigation-link">
                     About
                   </a>
                 </li>
-                <li class="navigation-item">
-                  <a id="btn-login" href="#" class="navigation-link">
-                    Log in
-                  </a>
-                </li>
+                {% if user %}
+                  <li class="navigation-item">
+                    <a id="btn-logout" href="/logout" class="navigation-link">
+                      <span class="hint--bottom" aria-label="Log out">
+                      <i class="ion-log-out"></i>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="navigation-item">
+                    <a id="btn-login" href="#" class="navigation-link">
+                      Log in
+                    </a>
+                  </li>
+                {% endif%}
               </ul>
             </section>
           </nav>
-            {% block header %}
-            {% endblock %}
+          {# Header #}
+          {% block header %}
+          {% endblock %}
+          {# Contents #}
           <section class="container">
             {% block content %}
             {% endblock %}
           </section>
+          {# Footer #}
+          <footer>
+    				<section class="container">
+              <i class="ion-code"></i> by <a href="http://github.com/leyka">Skander <i class="ion-social-octocat"></i> </a>
+    				</section>
+          </footer>
         </div>
-
         {# Scripts #}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
         <script src="/static/vendor/sweetalert/sweetalert.min.js"></script>
-        {% assets "common_js" %}
+        {% assets "app_js" %}
           <script src="{{ ASSET_URL }}"></script>
         {% endassets %}
     </body>

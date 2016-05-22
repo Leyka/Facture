@@ -1,10 +1,11 @@
 from flask import render_template, request, redirect, session, url_for, jsonify
 from facture import app
+from models import User, db
 
 @app.route('/')
 def index():
-    # if 'google_token' in session:
-    #     me = google.get('people/~')
-    #     return jsonify(me.data)
-    # return redirect(url_for('login'))
-    return render_template("index.html")
+    if 'user_id' in session:
+        u_id = session['user_id']
+        user = User.query.filter_by(id = u_id).first()
+        return render_template('home.html', user=user)
+    return render_template('index.html')

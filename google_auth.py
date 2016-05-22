@@ -1,6 +1,7 @@
 from flask_oauthlib.client import OAuth
 from flask import request, redirect, session, url_for, jsonify
 from facture import app
+from models import User, db
 
 oauth = OAuth()
 
@@ -29,7 +30,8 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('google_token', None)
-    return redirect(url_for('home'))
+    session.pop('user_id', None)
+    return redirect(url_for('index'))
 
 @app.route('/login/authorized')
 @google.authorized_handler
@@ -40,5 +42,21 @@ def authorized(resp):
             request.args['error_description']
         )
     session['google_token'] = (resp['access_token'], '')
-    me = google.get('userinfo')
-    return jsonify(me.data)
+    user_google = google.get('userinfo').data
+
+    # Check if user already exists, else update
+    new = User.query.filter_by(social_id=user_google['id']).count() <= 0
+    if new:
+        user = User(user_google['id'],
+                    user_google['email'],
+                    user_google['given_name'],
+                    user_google['family_name'],
+                    user_google['picture'])
+
+        db.session.add(user)
+        db.session.commit()
+    else:
+        user = User.query.filter_by(social_id=user_google['id']).first()
+
+    session['user_id'] = user.id
+    return redirect(url_for('index'))
