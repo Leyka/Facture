@@ -1,0 +1,35 @@
+{% extends "layout/_base.html" %}
+
+{% block body %}
+<nav>
+  <section class="container">
+    <a href="/" class="navigation-title"><i class="ion-android-done-all"></i> FACTURE</a>
+    <ul class="navigation-list float-right">
+      <li class="navigation-item">
+        <a href="/about" class="navigation-link">
+          About
+        </a>
+      </li>
+        <li class="navigation-item">
+          <a id="btn-login" href="#" class="navigation-link">
+            Log in
+          </a>
+        </li>
+    </ul>
+  </section>
+</nav>
+
+{% block header %}
+{% endblock %}
+
+<section class="container">
+  {% block content %}
+  {% endblock %}
+</section>
+
+<footer>
+  <section class="container">
+    <i class="ion-code"></i> by <a href="http://github.com/leyka">Skander <i class="ion-social-octocat"></i> </a>
+  </section>
+</footer>
+{% endblock%}

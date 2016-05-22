@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      {% if title %}
+          <title>{{ title }} - Facture</title>
+      {% else %}
+          <title>Facture</title>
+      {% endif %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+      {% assets "lib_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+      {% endassets %}
+      {% assets "app_css" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+      {% endassets %}
+      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.3.0/hint.base.min.css">
+    </head>
+    <body>
+        <div class="wrapper">
+          {% block body %}
+          {% endblock%}
+        </div>
+        {# Scripts #}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+        <script src="/static/vendor/sweetalert/sweetalert.min.js"></script>
+        {% assets "app_js" %}
+          <script src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+    </body>
+</html>
