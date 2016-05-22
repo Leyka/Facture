@@ -8,6 +8,7 @@
           <title>Facture</title>
       {% endif %}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
       {# Import the assets from assets.py #}
       {% assets "common_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
@@ -18,7 +19,6 @@
     </head>
     <body>
         <div class="wrapper">
-
           <nav>
             <section class="container">
               <a href="#" class="navigation-title">FACTURE</a>
@@ -36,18 +36,8 @@
               </ul>
             </section>
           </nav>
-
-          <header>
-            <div class="container">
-              <h1>Facture</h1>
-              <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, soluta.
-              </p>
-              <span class="hint--bottom" aria-label="Log in with Google">
-              <a href="/login" class="button button-google"><i class="ion-social-googleplus"></i></a>
-            </div>
-          </header>
-
+            {% block header %}
+            {% endblock %}
           <section class="container">
             {% block content %}
             {% endblock %}

@@ -7,4 +7,4 @@ def index():
     #     me = google.get('people/~')
     #     return jsonify(me.data)
     # return redirect(url_for('login'))
-    return render_template("home.html")
+    return render_template("index.html")

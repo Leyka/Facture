@@ -6,7 +6,8 @@ assets_env = assets.Environment(app)
 assets_env.register(
     'common_css',
     assets.Bundle(
-        'sass/layout.sass',
+        'sass/milligram/milligram.sass',
+        'sass/*.sass',
         filters=['sass', 'cssmin'],
         output='public/global.css'
     )
