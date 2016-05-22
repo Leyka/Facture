@@ -1,8 +1,5 @@
 import datetime
-from flask_sqlalchemy import SQLAlchemy
-from facture import app
-
-db = SQLAlchemy(app)
+from app import db
 
 # Table: Users-Organisations
 # 1 User can belongs to many organisations
@@ -14,7 +11,7 @@ users_orgs = db.Table('users_organisations',
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  social_id = db.Column(db.Integer, nullable=False)
+  social_id = db.Column(db.Float, nullable=False)
   first_name = db.Column(db.String, nullable=False)
   last_name = db.Column(db.String, nullable=False)
   picture = db.Column(db.String)

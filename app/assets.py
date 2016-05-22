@@ -1,5 +1,5 @@
 from flask.ext import assets
-from facture import app
+from app import app
 
 assets_env = assets.Environment(app)
 

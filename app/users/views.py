@@ -1,7 +1,8 @@
+from app import app
+from flask import request, redirect, session, url_for, Blueprint
 from flask_oauthlib.client import OAuth
-from flask import request, redirect, session, url_for, jsonify, Blueprint
-from facture import app
-from models import User, db
+
+from app.models import User, db
 
 # Blueprint
 users_blueprint = Blueprint(
@@ -63,4 +64,4 @@ def authorized(resp):
         user = User.query.filter_by(social_id=user_google['id']).first()
 
     session['user_id'] = user.id
-    return redirect(url_for('index'))
+    return redirect(url_for('home.index'))

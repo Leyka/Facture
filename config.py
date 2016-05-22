@@ -10,7 +10,7 @@ class Config(object):
 
 class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///db/facture.db'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/facture'
     SQLALCHEMY_ECHO = True
     ASSETS_DEBUG=True
 

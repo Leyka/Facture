@@ -3,6 +3,6 @@
 *.db
 venv
 .idea/
-static/.webassets-cache/
-static/public/
+app/static/.webassets-cache/
+app/static/public/
 secrets.json
