@@ -9,7 +9,9 @@ env = os.environ.get('FACTURE_ENV', 'prod')
 app.config.from_object('facture.config.%sConfig' % env.capitalize())
 
 #from models import *
+import facture.google_auth
 import facture.routes
+
 
 @app.after_request
 def response_minify(response):
