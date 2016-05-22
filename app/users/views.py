@@ -36,7 +36,7 @@ def login():
 def logout():
     session.pop('google_token', None)
     session.pop('user_id', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('home.index'))
 
 @users_blueprint.route('/login/authorized')
 @google.authorized_handler

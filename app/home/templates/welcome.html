@@ -1,34 +1,7 @@
-{% extends "public_layout.html" %}
-
-{% block header %}
-<header class="big-header">
-  <div class="container">
-    <h1>Facture</h1>
-    <p class="description">
-      Lorem ipsum dolor sit amets, consectetur adipisicing elit. Error, soluta.
-    </p>
-    <span class="hint--bottom" aria-label="Log in with Google">
-    <a href="/login" class="button button-google"><i class="ion-social-googleplus"></i></a>
-  </div>
-</header>
-{% endblock %}
+{% extends "app_layout.html" %}
 
 {% block content %}
-<div class="row text-center">
-  <div class="column">
-      <i class="ion-paper-airplane big-font"></i>
-      <h4>On the fly</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nobis nam, accusantium modi, nisi veritatis. Ratione perspiciatis eos, sequi officia!</p>
+  <div class="container">
+    <h2>Hi {{ user.full_name() }}</h2>
   </div>
-  <div class="column">
-    <i class="ion-heart big-font"></i>
-    <h4>Free</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad incidunt modi earum qui ducimus cum quia ab, necessitatibus doloribus nulla!</p>
-  </div>
-  <div class="column">
-    <i class="ion-code big-font"></i>
-    <h4>Open source</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad incidunt modi earum qui ducimus cum quia ab, necessitatibus doloribus nulla!</p>
-  </div>
-</div>
 {% endblock %}
