@@ -6,10 +6,10 @@ Système de générateur de factures écrit en Python/Flask.
 
 ## Todo
 
-- [ ] models: create groups (logo, name, etc.) 
+- [x] models: create organisation (logo, name, etc.) 
 - [ ] generate invoice in PDF
-- [ ] upload invoices in cloud (maybe GDrive?) 
-- [ ] connect w/ G+ 
+- [ ] don't save invoices. Just generate them when user ask on the fly. (rethink DB)
+- [x] connect w/ G+ 
 - [ ] deploy
 
 
