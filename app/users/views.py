@@ -1,10 +1,14 @@
 from flask_oauthlib.client import OAuth
-from flask import request, redirect, session, url_for, jsonify
+from flask import request, redirect, session, url_for, jsonify, Blueprint
 from facture import app
 from models import User, db
 
-oauth = OAuth()
+# Blueprint
+users_blueprint = Blueprint(
+  'users', __name__, template_folder='templates'
+)
 
+oauth = OAuth()
 google = oauth.remote_app('google',
     'google',
     consumer_key=app.config['GOOGLE_CLIENT_ID'],
@@ -23,17 +27,17 @@ google = oauth.remote_app('google',
 def get_google_token(token=None):
     return session.get('google_token')
 
-@app.route('/login')
+@users_blueprint.route('/login')
 def login():
-    return google.authorize(callback=url_for('authorized', _external=True))
+    return google.authorize(callback=url_for('users.authorized', _external=True))
 
-@app.route('/logout')
+@users_blueprint.route('/logout')
 def logout():
     session.pop('google_token', None)
     session.pop('user_id', None)
     return redirect(url_for('index'))
 
-@app.route('/login/authorized')
+@users_blueprint.route('/login/authorized')
 @google.authorized_handler
 def authorized(resp):
     if resp is None:

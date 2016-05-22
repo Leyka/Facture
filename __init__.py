@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, Blueprint
 from htmlmin.main import minify
 
 app = Flask(__name__)
@@ -8,9 +8,12 @@ app = Flask(__name__)
 env = os.environ.get('FACTURE_ENV', 'prod')
 app.config.from_object('facture.config.%sConfig' % env.capitalize())
 
-import facture.google_auth
 import facture.routes
 
+# Import & Register Blueprints
+from app.users.views import users_blueprint
+
+app.register_blueprint(users_blueprint)
 
 @app.after_request
 def response_minify(response):

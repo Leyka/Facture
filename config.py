@@ -1,5 +1,4 @@
-import uuid
-import json
+import uuid, json
 
 class Config(object):
     SECRET_KEY = str(uuid.uuid4())
