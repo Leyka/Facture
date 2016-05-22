@@ -1,4 +1,11 @@
 {% extends "layout/_base.html" %}
 
 {% block body %}
-{% endbody %}
+<section class="container">
+  <p>
+    <a href="/logout">Logout</a>
+  </p>
+  {% block content %}
+  {% endblock %}
+</section>
+{% endblock %}
