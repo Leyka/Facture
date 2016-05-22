@@ -12,8 +12,9 @@
       {% assets "common_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
       {% endassets %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.3.0/hint.base.min.css">
     </head>
     <body>
         <div class="wrapper">
@@ -42,7 +43,8 @@
               <p class="description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, soluta.
               </p>
-              <a href="#" class="button button-google" title="Sign in with Google+"><i class="ion-social-googleplus"></i></a>
+              <span class="hint--bottom" aria-label="Log in with Google">
+              <a href="/login" class="button button-google"><i class="ion-social-googleplus"></i></a>
             </div>
           </header>
 
