@@ -1,11 +1,62 @@
 {% extends "_base.html" %}
 
+{% block css %}
+  {% assets "app_layout_css" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}" />
+  {% endassets %}
+{% endblock %}
+
 {% block wrapper %}
-<section class="container">
-  <p>
-    <a href="/logout">Logout</a>
-  </p>
-  {% block content %}
-  {% endblock %}
+<nav>
+  <div class="nav-inner">
+    <div class="container">
+      <ul>
+        <li class="active">
+          <a href="/">
+            <i class="ion-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="ion-clipboard"></i>
+            <span>Invoices</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="ion-person-stalker"></i>
+            <span>Organisations</span>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="">
+            {% if user.picture  %}
+            <img src="{{ user.picture }}" alt="User picture">
+            {% endif %}
+            <span>
+               {{ user.first_name }}
+                <i class="ion-chevron-down"></i>
+            </span>
+          </a>
+          <div class="dropdown-content">
+              <a href="/profile"><i class="ion-android-person float-right"></i> Profile</a>
+              <a href="/logout"><i class="ion-log-out float-right"></i> Log out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="breadcrumbs">
+  <i class="ion-clipboard"></i>
+  <span><a href="">Invoices</a> / <a href="">#322</strong></a></span>
 </section>
+
+<section class="main">
+        {% block content %}
+        {% endblock %}
+</section>
+
 {% endblock %}

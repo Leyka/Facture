@@ -1,0 +1,140 @@
+// Variables
+$red-color: #ff7f74
+$green-color: #74FFC5
+$grey-color: #A2A2A2
+$nav-link-color: #6F6F6F
+$light-grey: #d6d6d6
+$max-width: 80rem
+
+body
+  background: #FBFBFB
+
+// Navbar
+nav
+  margin-bottom: 5rem
+
+  .nav-inner
+    background: #fff
+    height: 60px
+    border-bottom: 1px solid $light-grey
+
+    .container
+      margin: 0 auto
+      padding: 0
+
+
+      > ul
+        display: inline-block
+        height: 80px
+        padding: 0
+        margin: 0
+        list-style: disc
+        overflow: hidden
+        width: $max-width
+
+        > li
+          float: left
+          text-align: center
+          list-style: none
+          min-width: 140px
+          height: 60px
+          padding: 0
+          margin: 0
+          line-height: 18px
+          border-right: 1px solid $light-grey
+
+          > a
+            display: block
+            height: 100%
+            padding: 0 15px
+            color: $nav-link-color
+
+            > i
+              display: inline-block
+              width: 24px
+              height: 24px
+              margin-top: 11px
+              margin-bottom: -3px
+              font-size: 20px
+
+            > img
+              width: 28px
+              height: 24px
+              margin-top: 7px
+              border-radius: 50%
+
+            > span
+              display: block
+
+          &:first-child
+            border-left: 1px solid $light-grey
+          &:last-child
+            float: right
+            border: none
+
+
+          a:hover
+            border-bottom: 3px solid $green-color
+
+          &.active > a
+            color: #6F6F6F
+            border-bottom: 3px solid $red-color
+
+          &.dropdown
+
+            display: inline-block
+
+            &:hover
+              a
+                border-bottom: none
+                color: $grey-color
+
+              .dropdown-content
+                display: block
+
+            .dropdown-content
+              display: none
+              position: absolute
+              background-color: #fff
+              min-width: 160px
+              border: 1px solid $grey-color
+              border-top: none
+              border-bottom-right-radius: 10px
+              border-bottom-left-radius: 10px
+              z-index: 100
+
+              a
+                color: $nav-link-color
+                padding: 12px 16px
+                text-decoration: none
+                display: block
+                text-align: left
+
+                &:hover
+                  border-left: 2px solid $green-color
+                  color: $grey-color
+
+                  &:last-child
+                    border-bottom-right-radius: 10px
+                    border-bottom-left-radius: 10px
+
+
+
+// Breadcrumbs
+.breadcrumbs
+  max-width: $max-width
+  margin: 0 auto
+  margin-bottom: 1rem
+  font-size: 2rem
+
+  a
+    color: $grey-color
+
+// Main container
+.main
+  background-color: #fff
+  border: 1px solid #ccc
+  max-width: $max-width
+  margin: 0 auto
+  border-top-right-radius: 7px
+  border-bottom-left-radius: 7px

@@ -1,21 +1,30 @@
 from flask.ext.assets import Bundle
 
-app_css = Bundle(
+app_layout_css = Bundle(
     'sass/milligram/milligram.sass',
-    'sass/*.sass',
+    'sass/utils.sass',
+    'sass/app.sass',
     filters=['sass', 'cssmin'],
-    output='public/app.css'
+    output='public/app.min.css'
+)
+
+public_layout_css = Bundle(
+    'sass/milligram/milligram.sass',
+    'sass/utils.sass',
+    'sass/public.sass',
+    filters=['sass', 'cssmin'],
+    output='public/public.min.css'
 )
 
 lib_css = Bundle(
     'vendor/sweetalert/sweetalert.css',
     filters='cssmin',
-    output='public/lib.css'
+    output='public/lib.min.css'
 )
 
 app_js = Bundle(
     'js/*.js',
     filters='jsmin',
-    output='public/app.js'
+    output='public/app.min.js'
 )
 
