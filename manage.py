@@ -6,7 +6,6 @@ manager = Manager(app)
 
 # Commands
 manager.add_command("run", Server())
-manager.add_command("shell", Shell())
 
 @manager.command
 def createdb():

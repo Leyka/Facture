@@ -2,10 +2,9 @@ import uuid, json
 
 class Config(object):
     SECRET_KEY = str(uuid.uuid4())
-
     with open('secrets.json') as json_file:
         secrets =  json.load(json_file)
-        GOOGLE_CLIENT_ID = secrets['google_id']
+        GOOGLE_CLIENT_ID = '718782038011-fdki0ma37m7keo9d30b00kdorcnqga9a.apps.googleusercontent.com'
         GOOGLE_CLIENT_SECRET = secrets['google_secret']
 
 class DevConfig(Config):
@@ -16,5 +15,7 @@ class DevConfig(Config):
     ASSETS_DEBUG=True
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///db/facture.db'
-    HOST='0.0.0.0'
+    HOST = '0.0.0.0'
+    with open('secrets.json') as json_file:
+        secrets = json.load(json_file)
+        SQLALCHEMY_DATABASE_URI = 'postgresql://facture:' + secrets['postgres_pw'] + '@localhost/facture'
