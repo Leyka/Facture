@@ -1,32 +1,21 @@
-from flask.ext import assets
-from app import app
+from flask.ext.assets import Bundle
 
-assets_env = assets.Environment(app)
-
-assets_env.register(
-    'app_css',
-    assets.Bundle(
-        'sass/milligram/milligram.sass',
-        'sass/*.sass',
-        filters=['sass', 'cssmin'],
-        output='public/app.css'
-    )
+app_css = Bundle(
+    'sass/milligram/milligram.sass',
+    'sass/*.sass',
+    filters=['sass', 'cssmin'],
+    output='public/app.css'
 )
 
-assets_env.register(
-    'lib_css',
-    assets.Bundle(
-        'vendor/sweetalert/sweetalert.css',
-        filters='cssmin',
-        output='public/lib.css'
-    )
+lib_css = Bundle(
+    'vendor/sweetalert/sweetalert.css',
+    filters='cssmin',
+    output='public/lib.css'
 )
 
-assets_env.register(
-    'app_js',
-    assets.Bundle(
-        'js/*.js',
-        filters='jsmin',
-        output='public/app.js'
-    )
+app_js = Bundle(
+    'js/*.js',
+    filters='jsmin',
+    output='public/app.js'
 )
+

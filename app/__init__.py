@@ -1,13 +1,25 @@
+import os
+
 from flask import Flask
+from flask.ext.assets import Environment
 from flask.ext.sqlalchemy import SQLAlchemy
 from htmlmin.main import minify
+from webassets.loaders import PythonLoader as PythonAssetsLoader
 import os
+from app import assets
 
 # Config
 app = Flask(__name__)
 env = os.environ.get('FACTURE_ENV', 'prod')
 app.config.from_object('config.%sConfig' % env.capitalize())
 db = SQLAlchemy(app)
+
+assets_env = Environment(app)
+assets_loader = PythonAssetsLoader(assets)
+
+for name, bundle in assets_loader.load_bundles().items():
+    assets_env.register(name, bundle)
+
 
 # Import & Register Blueprints
 from app.users.views import users_blueprint

@@ -11,6 +11,7 @@ class Config(object):
 class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/facture'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_ECHO = True
     ASSETS_DEBUG=True
 
