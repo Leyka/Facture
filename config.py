@@ -16,6 +16,4 @@ class DevConfig(Config):
 
 class ProdConfig(Config):
     HOST = '0.0.0.0'
-    with open('secrets.json') as json_file:
-        secrets = json.load(json_file)
-        SQLALCHEMY_DATABASE_URI = 'postgresql://facture:' + secrets['postgres_pw'] + '@localhost/facture'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:@localhost/facture'
