@@ -15,5 +15,5 @@ class DevConfig(Config):
     ASSETS_DEBUG=True
 
 class ProdConfig(Config):
-    HOST = '0.0.0.0'
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:@localhost/facture'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True

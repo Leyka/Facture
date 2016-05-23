@@ -1,11 +1,14 @@
 # Set the path & imports
 from flask.ext.script import Manager, Shell, Server
-from app import app
+from flask_assets import ManageAssets
+from app import app, assets_env
 
 manager = Manager(app)
 
 # Commands
 manager.add_command("run", Server())
+manager.add_command("assets", ManageAssets(assets_env))
+
 
 @manager.command
 def createdb():
