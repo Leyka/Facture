@@ -8,3 +8,4 @@ cssmin
 jsmin
 htmlmin
 psycopg2
+gunicorn
