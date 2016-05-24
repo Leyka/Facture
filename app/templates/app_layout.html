@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% set active_page = active_page|default('home') -%}
 
 {% block css %}
   {% assets "app_layout_css" %}
@@ -11,25 +12,25 @@
   <div class="nav-inner">
     <div class="container">
       <ul>
-        <li class="active">
+        <li {% if active_page == 'home' %} class="active" {% endif %}>
           <a href="/">
             <i class="ion-home"></i>
             <span>Home</span>
           </a>
         </li>
-        <li>
-          <a href="#">
+        <li {% if active_page == 'invoices' %} class="active" {% endif %}>
+          <a href="/invoices">
             <i class="ion-clipboard"></i>
             <span>Invoices</span>
           </a>
         </li>
-        <li>
+        <li {% if active_page == 'organisations' %} class="active" {% endif %}>
           <a href="/organisations">
             <i class="ion-person-stalker"></i>
             <span>Organisations</span>
           </a>
         </li>
-        <li class="dropdown">
+        <li class="dropdown {% if active_page == 'users' %} active {% endif %}">
           <a href="">
             {% if g.user.picture  %}
             <img src="{{ g.user.picture }}" alt="User picture">
