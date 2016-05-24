@@ -1,7 +1,6 @@
-from app import app
-from flask import request, redirect, session, url_for, Blueprint
+from app import app, auth
+from flask import request, redirect, session, url_for, render_template, Blueprint
 from flask_oauthlib.client import OAuth
-
 from app.models import User, db
 
 # Blueprint
@@ -9,6 +8,14 @@ users_blueprint = Blueprint(
   'users', __name__, template_folder='templates'
 )
 
+
+@users_blueprint.route('/profile')
+@auth.login_required
+def profile():
+    return render_template('profile.html')
+
+
+# Google OAuth
 oauth = OAuth()
 google = oauth.remote_app('google',
     'google',
@@ -65,3 +72,5 @@ def authorized(resp):
 
     session['user_id'] = user.id
     return redirect(url_for('home.index'))
+
+
