@@ -24,18 +24,18 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/organisations">
             <i class="ion-person-stalker"></i>
             <span>Organisations</span>
           </a>
         </li>
         <li class="dropdown">
           <a href="">
-            {% if user.picture  %}
-            <img src="{{ user.picture }}" alt="User picture">
+            {% if g.user.picture  %}
+            <img src="{{ g.user.picture }}" alt="User picture">
             {% endif %}
             <span>
-               {{ user.first_name }}
+               {{ g.user.first_name }}
                 <i class="ion-chevron-down"></i>
             </span>
           </a>

@@ -1,22 +1,25 @@
 import os
-
-from flask import Flask
+from flask import Flask, g, session
 from flask.ext.assets import Environment
 from flask.ext.sqlalchemy import SQLAlchemy
 from htmlmin.main import minify
 from webassets.loaders import PythonLoader as PythonAssetsLoader
-import os
 from app import assets
+from app.auth import Auth
 
 # Config
 app = Flask(__name__)
 env = os.environ.get('FACTURE_ENV', 'prod')
 app.config.from_object('config.%sConfig' % env.capitalize())
-db = SQLAlchemy(app)
+auth = Auth()
 
+# Models
+db = SQLAlchemy(app)
+from app.models import User
+
+# Assets
 assets_env = Environment(app)
 assets_loader = PythonAssetsLoader(assets)
-
 for name, bundle in assets_loader.load_bundles().items():
     assets_env.register(name, bundle)
 
@@ -24,9 +27,22 @@ for name, bundle in assets_loader.load_bundles().items():
 # Import & Register Blueprints
 from app.users.views import users_blueprint
 from app.home.views import home_blueprint
+from app.organisations.views import orgs_blueprint
 
 app.register_blueprint(home_blueprint)
 app.register_blueprint(users_blueprint)
+app.register_blueprint(orgs_blueprint)
+
+
+# Pass the user object to views
+@app.before_request
+def set_current_user():
+    user_authenticated = 'user_id' in session
+
+    if user_authenticated:
+        u_id = session['user_id']
+        g.user = User.query.get(u_id)
+
 
 # Minify HTML when env is prod
 @app.after_request
