@@ -22,7 +22,6 @@ nav
       margin: 0 auto
       padding: 0
 
-
       > ul
         display: inline-block
         height: 80px
@@ -48,6 +47,8 @@ nav
             height: 100%
             padding: 0 15px
             color: $nav-link-color
+            transition: border .5s
+            border-bottom: 4px solid #ffffff
 
             > i
               display: inline-block
@@ -72,16 +73,14 @@ nav
             float: right
             border: none
 
-
           a:hover
             border-bottom: 3px solid $green-color
 
           &.active > a
             color: #6F6F6F
-            border-bottom: 3px solid $red-color
+            border-bottom: 4px solid $red-color
 
           &.dropdown
-
             display: inline-block
 
             &:hover
@@ -117,8 +116,6 @@ nav
                   &:last-child
                     border-bottom-right-radius: 10px
                     border-bottom-left-radius: 10px
-
-
 
 // Breadcrumbs
 .breadcrumbs

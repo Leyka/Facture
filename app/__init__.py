@@ -5,7 +5,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from htmlmin.main import minify
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 from app import assets
-from app.auth import Auth
+from app.utils.auth import Auth
+from flask.ext import breadcrumbs
 
 # Config
 app = Flask(__name__)
@@ -35,6 +36,10 @@ app.register_blueprint(users_blueprint)
 app.register_blueprint(orgs_blueprint)
 app.register_blueprint(invoices_blueprint)
 
+
+# Initialize Flask-Breadcrumbs
+breadcrumbs.Breadcrumbs(app=app)
+breadcrumbs.default_breadcrumb_root(home_blueprint, '.home')
 
 # Pass the user object to views
 @app.before_request

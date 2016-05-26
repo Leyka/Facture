@@ -4,6 +4,7 @@ Flask-WTF
 Flask-Script
 Flask-Assets
 Flask-OAuthlib
+Flask-Breadcrumbs
 cssmin
 jsmin
 htmlmin
