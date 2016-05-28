@@ -1,12 +1,11 @@
 import os
-from flask import Flask, g, session
+from flask import Flask, g, session, Blueprint
 from flask.ext.assets import Environment
 from flask.ext.sqlalchemy import SQLAlchemy
 from htmlmin.main import minify
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 from app import assets
 from app.utils.auth import Auth
-from flask.ext import breadcrumbs
 
 # Config
 app = Flask(__name__)
@@ -27,19 +26,15 @@ for name, bundle in assets_loader.load_bundles().items():
 
 # Import & Register Blueprints
 from app.users.views import users_blueprint
-from app.home.views import home_blueprint
-from app.organisations.views import orgs_blueprint
+from app.home.views import home
+from app.organisations.views import orgs
 from app.invoices.views import invoices_blueprint
 
-app.register_blueprint(home_blueprint)
+app.register_blueprint(home)
 app.register_blueprint(users_blueprint)
-app.register_blueprint(orgs_blueprint)
+app.register_blueprint(orgs)
 app.register_blueprint(invoices_blueprint)
 
-
-# Initialize Flask-Breadcrumbs
-breadcrumbs.Breadcrumbs(app=app)
-breadcrumbs.default_breadcrumb_root(home_blueprint, '.home')
 
 # Pass the user object to views
 @app.before_request
