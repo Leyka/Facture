@@ -4,12 +4,12 @@ from flask_oauthlib.client import OAuth
 from app.models import User, db
 
 # Blueprint
-users_blueprint = Blueprint(
+users = Blueprint(
   'users', __name__, template_folder='templates'
 )
 
 
-@users_blueprint.route('/profile')
+@users.route('/profile')
 @auth.login_required
 def profile():
     return render_template('profile.html')
@@ -35,17 +35,17 @@ google = oauth.remote_app('google',
 def get_google_token(token=None):
     return session.get('google_token')
 
-@users_blueprint.route('/login')
+@users.route('/login')
 def login():
     return google.authorize(callback=url_for('users.authorized', _external=True))
 
-@users_blueprint.route('/logout')
+@users.route('/logout')
 def logout():
     session.pop('google_token', None)
     session.pop('user_id', None)
     return redirect(url_for('home.index'))
 
-@users_blueprint.route('/login/authorized')
+@users.route('/login/authorized')
 @google.authorized_handler
 def authorized(resp):
     if resp is None:
@@ -72,5 +72,3 @@ def authorized(resp):
 
     session['user_id'] = user.id
     return redirect(url_for('home.index'))
-
-

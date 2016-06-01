@@ -25,15 +25,15 @@ for name, bundle in assets_loader.load_bundles().items():
 
 
 # Import & Register Blueprints
-from app.users.views import users_blueprint
+from app.users.views import users
 from app.home.views import home
 from app.organisations.views import orgs
-from app.invoices.views import invoices_blueprint
+from app.invoices.views import invoices
 
 app.register_blueprint(home)
-app.register_blueprint(users_blueprint)
+app.register_blueprint(users)
 app.register_blueprint(orgs)
-app.register_blueprint(invoices_blueprint)
+app.register_blueprint(invoices)
 
 
 # Pass the user object to views
