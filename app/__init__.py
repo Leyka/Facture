@@ -23,7 +23,6 @@ assets_loader = PythonAssetsLoader(assets)
 for name, bundle in assets_loader.load_bundles().items():
     assets_env.register(name, bundle)
 
-
 # Import & Register Blueprints
 from app.users.views import users
 from app.home.views import home
@@ -35,16 +34,13 @@ app.register_blueprint(users)
 app.register_blueprint(orgs)
 app.register_blueprint(invoices)
 
-
 # Pass the user object to views
 @app.before_request
 def set_current_user():
     user_authenticated = 'user_id' in session
-
     if user_authenticated:
-        u_id = session['user_id']
-        g.user = User.query.get(u_id)
-
+        user_id = session['user_id']
+        g.user = User.query.get(user_id)
 
 # Minify HTML when env is prod
 @app.after_request
