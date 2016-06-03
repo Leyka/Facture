@@ -1,0 +1,67 @@
+// ---------- Settings -----------
+$default-line-height: 20%
+$main-color: #606c76
+$second-color: #0099CC
+$pdf-size: A4
+$pdf-margin: 1.5cm
+// -------------------------------
+
+@page
+  size: $pdf-size
+  margin: $pdf-margin
+
+body
+  font-family: 'PT Serif'
+  font-size: 14px
+  color: $main-color
+
+p
+  line-height: $default-line-height
+
+.wrapper
+  position: relative
+
+.from
+  float: left
+
+  p
+    line-height: $default-line-height + 15%
+
+.invoice-title
+  float: right
+
+  h1
+    font-weight: 400
+    font-size: 40px
+    letter-spacing: 7px
+    text-transform: uppercase
+    line-height: 20%
+    color: $second-color
+  p
+    text-align: right
+    font-size: 1.05rem
+
+.to
+  position: absolute
+  top: 150px
+
+  p
+    font-size: 1.1em
+
+.invoice
+  position: absolute
+  top: 320px
+
+table
+  border-collapse: collapse
+  width: 100%
+
+th
+  height: 50px
+  width: 100%
+  background-color: $second-color
+  font-family: Lato
+  color: #ffffff
+  padding: 0px 10px
+  text-transform: uppercase
+

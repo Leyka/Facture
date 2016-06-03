@@ -1,13 +1,47 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <style>
-        @page { size: A4; margin: 1cm }
-        body {  font-family: sans-serif; background: #eeeeee; }
-        h1 { color: #9C1A1C; }
-        pre { color: #3A7734; }
-</style>
+    <meta charset="utf-8">
+    <title>Invoice-</title>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif|Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+    {% assets "pdf_css" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
 </head>
+
 <body>
-<h1>Hello {{ name }} ! </h1>
+    <div class="wrapper">
+        <header>
+            <section class="from">
+                <p><strong>Club Reflets</strong></p>
+                <p>École de Technologie supérieure</p>
+                <p>Montreal</p>
+            </section>
+            <section class="invoice-title">
+                <h1>Facture</h1>
+                <p>No. 2</p>
+            </section>
+        </header>
+
+        <section class="to">
+            <p>À l'attention d'Antoine Leduc,</p>
+            <p>Lorem ipsum dolor</p>
+            <p>344, Lorem ipsum dolor</p>
+            <p>Lorem ipsum dolor</p>
+            <p>H2R 2H8</p>
+        </section>
+
+        <section class="invoice">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bob</th>
+                        <th>23/01/2016</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
 </body>
-
-
+</html>

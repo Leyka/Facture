@@ -20,6 +20,7 @@ def new():
 
     name = request.form['name']
     html = render_template('invoice.pdf.html', name=name)
+    #return html
     return render_pdf(HTML(string=html))
 
 

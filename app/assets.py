@@ -22,6 +22,12 @@ lib_css = Bundle(
     output='public/lib.min.css'
 )
 
+pdf_css = Bundle(
+    'sass/invoice_pdf.sass',
+    filters=['sass', 'cssmin'],
+    output='public/pdf.min.css'
+)
+
 app_js = Bundle(
     'js/*.js',
     filters='jsmin',
