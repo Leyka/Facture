@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from flask_weasyprint import HTML, render_pdf
 from app import auth
 
 # Blueprint
@@ -16,4 +17,9 @@ def index():
 def new():
     if request.method == 'GET':
         return render_template('new.html')
-    return "post"
+
+    name = request.form['name']
+    html = render_template('invoice.pdf.html', name=name)
+    return render_pdf(HTML(string=html))
+
+

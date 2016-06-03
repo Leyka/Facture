@@ -1,0 +1,11 @@
+{% extends "app_layout.html" %}
+{% set active_page = "invoices" %}
+
+{% block content %}
+<h2>Create new invoice</h2>
+<form method="post">
+    <input type="text" placeholder="Your name" name="name">
+    <input type="submit">
+</form>
+{% endblock %}
+

@@ -14,7 +14,6 @@ users = Blueprint(
 def profile():
     return render_template('profile.html')
 
-
 # Google OAuth
 oauth = OAuth()
 google = oauth.remote_app('google',
