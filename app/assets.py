@@ -23,7 +23,6 @@ lib_css = Bundle(
 )
 
 pdf_css = Bundle(
-    'sass/milligram/_Grid.sass',
     'sass/milligram/_Table.sass',
     'sass/invoice_pdf.sass',
     filters=['sass', 'cssmin'],

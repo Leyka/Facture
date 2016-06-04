@@ -2,7 +2,7 @@
 $default-line-height: 20%
 $main-color: #606c76
 $second-color: #0099CC
-$pdf-size: A4
+$pdf-size: Letter
 $pdf-margin: 1.3cm
 // -------------------------------
 
@@ -23,8 +23,6 @@ p
 
 .from
   float: left
-
-
   p
     line-height: $default-line-height + 15%
 
@@ -44,24 +42,15 @@ p
 
 .to
   position: absolute
-  top: 150px
+  top: 120px
 
   p
     font-size: 1.1em
 
 .invoice
   position: absolute
-  top: 320px
+  top: 290px
   width: 100%
-
-.left
-  float: left
-
-.right
-  float: right
-
-.no-border
-  border-bottom: none
 
 .table-title
   background-color: $second-color
@@ -72,17 +61,15 @@ p
 
   &.infos
     font-size: 1.2rem
-    padding-top: 15px
-    height: 30px
+    padding-top: 12px
+    height: 25px
 
 .invoice-lines
   margin-top: 50px
-
   th
     background-color: $second-color
     color: #ffffff
     border-bottom: none
-
   th, td
     padding: 10px
 
@@ -90,6 +77,7 @@ p
   position: fixed
   bottom: 30px
 
+// Table
 table
   border-collapse: collapse
 
@@ -97,6 +85,17 @@ th
   font-family: 'Open Sans', sans-serif
   text-transform: uppercase
   font-weight: 400
+
 th, td
   padding-top: 15px
   padding-bottom: 15px
+
+// Helpers
+.left
+  float: left
+
+.right
+  float: right
+
+.no-border
+  border-bottom: none
