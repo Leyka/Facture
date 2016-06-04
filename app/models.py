@@ -62,7 +62,6 @@ class Organisation(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
   invoices = db.relationship('Invoice', backref='organisation',lazy='dynamic')
-  users = db.relationship('User', backref='organisation',lazy='dynamic')
   address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
 
   def __init__(self, name, addr_id):
