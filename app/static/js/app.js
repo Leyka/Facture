@@ -13,4 +13,15 @@ $(document).ready(function (){
     });
   });
 
+  $("#btn-create-invoice").click(function(){
+
+    // Affihcer loading
+    swal({
+      title: "Generating...",
+      text: '<p>Please wait while we generate your PDF</p></p><div class="spinner"> <div class="double-bounce1"></div> <div class="double-bounce2"></div> </div>',
+      showConfirmButton: false,
+      html: true
+    });
+  });
+
 });

@@ -17,12 +17,14 @@ public_layout_css = Bundle(
 )
 
 lib_css = Bundle(
-    'vendor/sweetalert/sweetalert.css',
+    'vendor/sweetalert.css',
     filters='cssmin',
     output='public/lib.min.css'
 )
 
 pdf_css = Bundle(
+    'sass/milligram/_Grid.sass',
+    'sass/milligram/_Table.sass',
     'sass/invoice_pdf.sass',
     filters=['sass', 'cssmin'],
     output='public/pdf.min.css'

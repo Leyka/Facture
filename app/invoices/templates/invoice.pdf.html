@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Invoice-</title>
-    <link href='https://fonts.googleapis.com/css?family=PT+Serif|Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif|Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
     {% assets "pdf_css" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
@@ -25,22 +25,72 @@
         </header>
 
         <section class="to">
-            <p>À l'attention d'Antoine Leduc,</p>
-            <p>Lorem ipsum dolor</p>
+            <p>À l'attention de</p>
+            <p>Antoine Leduc,</p>
             <p>344, Lorem ipsum dolor</p>
             <p>Lorem ipsum dolor</p>
             <p>H2R 2H8</p>
         </section>
 
         <section class="invoice">
+            <div class="table-title infos">
+                <div class="left">Levée de fonds - Regroupement REFLETS</div>
+                <div class="right">23/01/2016</div>
+            </div>
             <table>
-                <thead>
-                    <tr>
-                        <th>Bob</th>
-                        <th>23/01/2016</th>
-                    </tr>
-                </thead>
+                <tr>
+                    <th style="width: 30%">Facturer à</th>
+                    <th style="width: 70%">Instructions</th>
+                </tr>
+                <tr>
+                    <td>
+                        Société du Quartier <br>
+                        355 ipsum dolor sit <br>
+                        Montréal
+                    </td>
+                    <td>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aperiam deserunt dolorem, explicabo illo in molestiae obcaecati quam reprehenderit.
+                    </td>
+                </tr>
             </table>
+
+            <section class="invoice-lines">
+                <table>
+                    <tr>
+                        <th style="width: 70%">Description</th>
+                        <th style="width: 20%">Date</th>
+                        <th style="width: 10%">Tarif</th>
+                    </tr>
+                    <tr>
+                        <td>Mashup! - Couverture photo + postproduction</td>
+                        <td>16 mars 2016</td>
+                        <td>90$</td>
+                    </tr>
+                    <tr>
+                        <td>Mashup! - Couverture photo + postproduction</td>
+                        <td>16 mars 2016</td>
+                        <td>90$</td>
+                    </tr>
+                    <tr>
+                        <td class="no-border"></td>
+                        <td class="no-border"></td>
+                        <td class="no-border"></td>
+                    </tr>
+                    <tr>
+                        <td class="no-border"></td>
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>180$</strong></td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+
+        <section class="signature">
+            <p>Merci de votre confiance.</p>
+            <br>
+            <p>Cordialement,</p>
+            <p>Skander Kchouk</p>
+            <p>VP Finance, Club Reflets</p>
         </section>
     </div>
 </body>

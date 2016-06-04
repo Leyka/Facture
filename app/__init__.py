@@ -9,7 +9,7 @@ from app.utils.auth import Auth
 
 # Config
 app = Flask(__name__)
-env = os.environ.get('FACTURE_ENV', 'prod')
+env = os.environ.get('FACTURE_ENV', 'dev')
 app.config.from_object('config.%sConfig' % env.capitalize())
 auth = Auth()
 
