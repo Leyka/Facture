@@ -6,7 +6,8 @@ from app import db
 # And 1 organisation can have many users
 users_orgs = db.Table('users_organisations',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('org_id', db.Integer, db.ForeignKey('organisation.id'))
+    db.Column('org_id', db.Integer, db.ForeignKey('organisation.id')),
+    db.Column('user_role', db.String)
 )
 
 class User(db.Model):
@@ -36,16 +37,50 @@ class Invoice(db.Model):
   org_id = db.Column(db.Integer, db.ForeignKey('organisation.id'), nullable=False)
   created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+  line_items = db.relationship('InvoiceLineItem', backref='invoice',lazy='dynamic')
 
   def __init__(self, ref_number, org_id, created_by):
     self.ref_number = ref_number
     self.org_id = org_id
     self.created_by = created_by
 
+class InvoiceLineItem(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  description = db.Column(db.String, nullable=False)
+  date = db.Column(db.Date, nullable=False)
+  amount = db.Column(db.Float, nullable=False)
+  invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id'), nullable=False)
+
+  def __init__(self, description, date, amount, invoice_id):
+    self.description = description
+    self.date = date
+    self.amount = amount
+    self.invoice_id = invoice_id
+
+
 class Organisation(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
   invoices = db.relationship('Invoice', backref='organisation',lazy='dynamic')
+  users = db.relationship('User', backref='organisation',lazy='dynamic')
+  address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
 
-  def __init__(self, name):
+  def __init__(self, name, addr_id):
     self.name = name
+    self.address_id = addr_id
+
+class Address(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  address = db.Column(db.String, nullable=False)
+  city = db.Column(db.String, nullable=False)
+  province = db.Column(db.String(2), nullable=False)
+  country = db.Column(db.String, nullable=False)
+  postal_code = db.Column(db.String(16), nullable=False)
+
+  def __init__(self, address, city, province, country, postal_code):
+    self.address = address
+    self.city = city
+    self.province = province
+    self.country = country
+    self.postal_code = postal_code
+
