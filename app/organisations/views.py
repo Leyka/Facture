@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, g, url_for, redirect, flash, jsonify
+from flask import Blueprint, render_template, request, g, url_for, redirect, flash
 from app import auth, db
 from .forms import OrganisationForm
 from app.models import Address, Organisation
@@ -60,9 +60,9 @@ def save():
 
         organisation.name = request.form['name']
         organisation.manager_name = ['manager_name']
-        organisation.users.append(g.user)
 
         if new:
+            organisation.users.append(g.user)
             db.session.add(organisation)
         db.session.commit()
 
