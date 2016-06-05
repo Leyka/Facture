@@ -2,10 +2,10 @@
 {% set active_page = "organisations" %}
 
 {% block content %}
-<form method="post" role="form">
-    <h2 class="float-left">New Organisation</h2>
-    <input type="submit" value="Save" class="float-right button-header">
+<form method="post" role="form" action="/organisations/save">
+    {% include 'shared/header_save.html' %}
     {{ form.csrf_token }}
+    {{ form.id }}
         <div class="row">
             <div class="column">
                 <label for="name">Name</label>
@@ -13,7 +13,7 @@
             </div>
             <div class="column">
                 <label for="manager_name">Manager Name</label>
-                {{ form.manager_name(placeholder='Manager name (optional)') }}
+                {{ form.manager_name(placeholder='Manager name (optional)')}}
             </div>
         </div>
         <hr>
@@ -44,6 +44,6 @@
             </div>
         </div>
         <hr>
-        <a href="#" class="button button-clear"><i class="ion-chevron-left"></i> Back</a>
+        {% include 'shared/back.html' %}
 </form>
 {% endblock %}

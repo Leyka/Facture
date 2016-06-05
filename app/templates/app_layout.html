@@ -3,7 +3,7 @@
 
 {% block css %}
   {% assets "app_layout_css" %}
-      <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
   {% endassets %}
 {% endblock %}
 
@@ -55,6 +55,13 @@
 
 <section class="main">
   <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     {% block content %}
     {% endblock %}
   </div>

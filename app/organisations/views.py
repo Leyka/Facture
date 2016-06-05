@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, g, url_for, redirect
+from flask import Blueprint, render_template, request, g, url_for, redirect, flash, jsonify
 from app import auth, db
-from .forms import NewOrgForm
+from .forms import OrganisationForm
 from app.models import Address, Organisation
 
 # Blueprint
@@ -11,45 +11,97 @@ orgs = Blueprint(
 @orgs.route('/organisations')
 @auth.login_required
 def index():
-    organisations = g.user.organisations
-    return render_template('organisations.html', organisations=organisations)
+    return render_template('organisations.html', organisations=get_organisations())
 
-@orgs.route('/organisations/new', methods=['GET', 'POST'])
+@orgs.route('/organisations/new')
 @auth.login_required
 def new():
-    form = NewOrgForm()
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            organisation = Organisation(
-                request.form['name'],
-                request.form['manager_name']
-            )
-            organisation.users.append(g.user)
+    form = OrganisationForm()
+    return render_template("organisation_form.html", form=form, title="New Organisation")
+
+@orgs.route('/organisations/edit/<int:id>')
+@auth.login_required
+def edit(id):
+    if user_has_rights(id):
+        org = Organisation.query.get_or_404(id)
+        form = OrganisationForm(obj=org)
+        org_address = org.addresses.first()
+
+        form.address.data = org_address.address
+        form.city.data = org_address.city
+        form.province.data = org_address.province
+        form.postal_code.data = org_address.postal_code
+        form.country.data = org_address.country
+
+        return render_template('organisation_form.html', form=form, title="Edit " + org.name)
+    else:
+        error = 'Not allowed to edit this organisation'
+        return to_403(error)
+
+@orgs.route("/organisations/save", methods=['POST'])
+@auth.login_required
+def save():
+    form = OrganisationForm()
+    if form.validate_on_submit():
+        # check if user is trying to edit
+        id = request.form['id']
+        new = id is None
+        user_can_edit = not new and user_has_rights(id)
+
+        organisation = None
+        address = None
+
+        if user_can_edit:
+            organisation = Organisation.query.get_or_404(id)
+            address = organisation.addresses.first()
+        elif not user_can_edit:
+            error = "Not allowed to edit this organisation"
+            return to_403(error)
+
+        organisation.name = request.form['name']
+        organisation.manager_name = ['manager_name']
+        organisation.users.append(g.user)
+
+        if new:
             db.session.add(organisation)
-            db.session.commit()
+        db.session.commit()
 
-            address = Address(
-                request.form['address'],
-                request.form['city'],
-                request.form['province'],
-                request.form['country'],
-                request.form['postal_code'],
-                organisation.id
-            )
+        address.address = request.form['address']
+        address.city = request.form['city']
+        address.province = request.form['province']
+        address.country = request.form['country']
+        address.postal_code = request.form['postal_code']
+        address.organisation_id = organisation.id
+
+        if new:
             db.session.add(address)
-            db.session.commit()
+        db.session.commit()
 
-            return redirect(url_for('organisations.index'))
+        flash(organisation.name + " has been saved")
+        return redirect(url_for('organisations.index'))
 
-    return render_template("new.organisation.html", form=form)
-
-@orgs.route('/organisations/delete/<int:id>', methods=['GET'])
+@orgs.route('/organisations/delete/<int:id>')
 @auth.login_required
 def delete(id):
-    org = Organisation.query.get(id)
-    if org in g.user.organisations:
+    if user_has_rights(id):
+        org = Organisation.query.get_or_404(id)
+        name = org.name
         db.session.delete(org)
         db.session.commit()
+        flash(name + ' has been deleted')
+    else:
+        error = 'Not allowed to delete this organisation'
+        return to_403(error)
+
     return redirect(url_for('organisations.index'))
 
+def get_organisations():
+    return g.user.organisations
 
+def user_has_rights(id):
+    if id is None:
+        return False
+    return Organisation.query.get_or_404(id) in g.user.organisations
+
+def to_403(error):
+    return render_template('organisations.html', organisations=get_organisations(), error=error)
