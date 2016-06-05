@@ -14,8 +14,6 @@ $(document).ready(function (){
   });
 
   $("#btn-create-invoice").click(function(){
-
-    // Affihcer loading
     swal({
       title: "Generating...",
       text: '<p>Please wait while we generate your PDF</p></p><div class="spinner"> <div class="double-bounce1"></div> <div class="double-bounce2"></div> </div>',
@@ -24,4 +22,22 @@ $(document).ready(function (){
     });
   });
 
+  // Delete organisation
+  $(".delete-org").click(function(e){
+    e.preventDefault();
+
+    var org_id = $(this).data("id");
+
+    swal({
+      title: "Are you sure?",
+      text: "All data, including invoices, will be deleted.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it",
+      closeOnConfirm: false },
+        function(){
+          window.location.href = '/organisations/delete/' + org_id;
+        });
+  });
 });

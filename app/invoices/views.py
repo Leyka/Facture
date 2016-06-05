@@ -16,7 +16,7 @@ def index():
 @auth.login_required
 def new():
     if request.method == 'GET':
-        return render_template('new.html')
+        return render_template('new.invoice.html')
 
     name = request.form['name']
     html = render_template('invoice.pdf.html', name=name)

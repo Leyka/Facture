@@ -1,0 +1,49 @@
+{% extends "app_layout.html" %}
+{% set active_page = "organisations" %}
+
+{% block content %}
+<form method="post" role="form">
+    <h2 class="float-left">New Organisation</h2>
+    <input type="submit" value="Save" class="float-right button-header">
+    {{ form.csrf_token }}
+        <div class="row">
+            <div class="column">
+                <label for="name">Name</label>
+                {{ form.name(placeholder='Name', required=True)}}
+            </div>
+            <div class="column">
+                <label for="manager_name">Manager Name</label>
+                {{ form.manager_name(placeholder='Manager name (optional)') }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="column">
+                <label for="address">Address</label>
+                {{ form.address(placeholder='Address (e.g. 55, beautiful street)', required=True)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="city">City</label>
+                {{ form.city(placeholder='City name', required=True)}}
+            </div>
+            <div class="column">
+                <label for="city">Province/State</label>
+                {{ form.province(placeholder='E.g. QC, NY. (optional)', maxlength=2)}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="city">Postal Code</label>
+                {{ form.postal_code(placeholder='Postal Code', required=True, maxlength=16)}}
+            </div>
+            <div class="column">
+                <label for="city">Country</label>
+                {{ form.country(placeholder='Country name', required=True)}}
+            </div>
+        </div>
+        <hr>
+        <a href="#" class="button button-clear"><i class="ion-chevron-left"></i> Back</a>
+</form>
+{% endblock %}

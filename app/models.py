@@ -61,12 +61,14 @@ class InvoiceLineItem(db.Model):
 class Organisation(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
-  invoices = db.relationship('Invoice', backref='organisation',lazy='dynamic')
-  address_id = db.Column(db.Integer, db.ForeignKey('address.id'), nullable=False)
+  invoices = db.relationship('Invoice', backref='organisation',lazy='dynamic', cascade="all, delete-orphan")
+  manager_name = db.Column(db.String)
+  addresses = db.relationship('Address', backref='organisation', lazy='dynamic', cascade="all, delete-orphan")
 
-  def __init__(self, name, addr_id):
+  def __init__(self, name, manager_name=None):
     self.name = name
-    self.address_id = addr_id
+    if manager_name is not None:
+      self.manager_name = manager_name
 
 class Address(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -75,11 +77,13 @@ class Address(db.Model):
   province = db.Column(db.String(2), nullable=False)
   country = db.Column(db.String, nullable=False)
   postal_code = db.Column(db.String(16), nullable=False)
+  organisation_id = db.Column(db.Integer, db.ForeignKey('organisation.id'), nullable=False)
 
-  def __init__(self, address, city, province, country, postal_code):
+  def __init__(self, address, city, province, country, postal_code, organisation_id):
     self.address = address
     self.city = city
     self.province = province
     self.country = country
     self.postal_code = postal_code
+    self.organisation_id = organisation_id
 

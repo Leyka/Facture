@@ -2,5 +2,51 @@
 {% set active_page = "organisations" %}
 
 {% block content %}
-<h2>Organisations</h2>
+
+<div class="row">
+    <div class="column">
+        <h2>Organisations</h2>
+    </div>
+    <div class="column button-header">
+        <a href="/organisations/new" class="button float-right"><i class="ion-plus-round"></i> New organisation</a>
+    </div>
+</div>
+<hr>
+{% if organisations|length <= 0 %}
+    <div class="row">
+        <div class="column panel message">
+            <p>Oh ! Seems like you don't have any organisations yet.</p>
+            <p>Would you like to <a href="/organisations/new">create a new one</a> ?</p>
+        </div>
+    </div>
+{% else %}
+
+    {% for org in organisations %}
+    <div class="row panel">
+        <div class="column column-20">
+            <label>Name</label>
+            <span>{{ org.name }}</span>
+        </div>
+        <div class="column column-20">
+            <label><i class="ion-pound"></i> Invoices</label>
+            <span><a href="#">{{ org.invoices.count() }}</a></span>
+        </div>
+        <div class="column address column-40">
+            <label>Address</label>
+            <p>{{ org.addresses.first().address }}</p>
+            <p>{{ org.addresses.first().city }}
+                {% if org.addresses.first().province %}
+                    ({{ org.addresses.first().province }})
+                {% endif %}
+            </p>
+            <p>{{ org.addresses.first().postal_code }}, {{ org.addresses.first().country }}</p>
+        </div>
+        <div class="column action-buttons column-20">
+            <a href="#" class="button button-outline max-width">Edit</a>
+            <a href="#" data-id="{{ org.id }}" class="btn-delete button button-outline max-width delete-org" data-method="delete" rel="nofollow">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endif %}
 {% endblock %}
