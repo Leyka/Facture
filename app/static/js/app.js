@@ -1,6 +1,17 @@
-$(document).ready(function (){
+$(document).ready(function () {
 
-  $("#btn-login").click(function(){
+  // Notification Fade out
+  setTimeout(function () {
+    $('#notification').fadeOut('slow', function () {
+      $(this).remove();
+    })
+  }, 2000);
+
+  $('.close').click(function () {
+    $(this).closest('#notification').remove();
+  });
+
+  $("#btn-login").click(function () {
     swal({
       title: "Connect with Google",
       text: "You will be redirected to authorize Facture to connect with your Google account.",
@@ -13,7 +24,7 @@ $(document).ready(function (){
     });
   });
 
-  $("#btn-create-invoice").click(function(){
+  $("#btn-create-invoice").click(function () {
     swal({
       title: "Generating...",
       text: '<p>Please wait while we generate your PDF</p></p><div class="spinner"> <div class="double-bounce1"></div> <div class="double-bounce2"></div> </div>',
@@ -23,7 +34,7 @@ $(document).ready(function (){
   });
 
   // Delete organisation
-  $(".delete-org").click(function(e){
+  $(".delete-org").click(function (e) {
     e.preventDefault();
 
     var org_id = $(this).data("id");

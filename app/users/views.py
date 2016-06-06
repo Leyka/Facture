@@ -1,5 +1,5 @@
 from app import app, auth
-from flask import request, redirect, session, url_for, render_template, Blueprint
+from flask import request, redirect, session, url_for, render_template, Blueprint, flash
 from flask_oauthlib.client import OAuth
 from app.models import User, db
 
@@ -70,4 +70,5 @@ def authorized(resp):
         user = User.query.filter_by(social_id=user_google['id']).first()
 
     session['user_id'] = user.id
+    flash('Welcome back ' + user.first_name + ' !')
     return redirect(url_for('home.index'))

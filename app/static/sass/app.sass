@@ -117,6 +117,33 @@ nav
                     border-bottom-right-radius: 10px
                     border-bottom-left-radius: 10px
 
+// Notification
+#notification
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: 999
+  opacity: 0.95
+
+  &.success
+    background: #56CA9F
+  &.error
+    background: #DC5C5C
+
+  .flash, .error
+    padding: 2.4rem 0
+    text-align: center
+    color: #fff
+    margin-bottom: 0px
+    font-size: 1.3rem
+    font-weight: bold
+    letter-spacing: 1px
+
+    .close
+      color: #fff
+      font-size: 1.7rem
+      padding-right: 30px
+
 // Breadcrumbs
 .breadcrumbs
   max-width: $max-width
