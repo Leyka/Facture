@@ -1,5 +1,5 @@
 import os
-from flask import Flask, g, session, Blueprint
+from flask import Flask, g, session, Blueprint, render_template
 from flask.ext.assets import Environment
 from flask.ext.sqlalchemy import SQLAlchemy
 from htmlmin.main import minify
@@ -49,3 +49,13 @@ def response_minify(response):
         response.set_data( minify(response.get_data(as_text=True)))
         return response
     return response
+
+# Custom errors
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('errors/404.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    if env == 'prod':
+        return render_template('errors/500.html'), 500
