@@ -3,7 +3,7 @@ from wtforms import StringField, HiddenField
 from wtforms.validators import DataRequired, Length
 
 class OrganisationForm(Form):
-    id = HiddenField('id')
+    id = HiddenField('id', default="-1")
     name = StringField('name', validators=[DataRequired()])
     manager_name = StringField('manager_name')
     address = StringField('address', validators=[DataRequired()])

@@ -70,5 +70,4 @@ def authorized(resp):
         user = User.query.filter_by(social_id=user_google['id']).first()
 
     session['user_id'] = user.id
-    flash('Welcome back ' + user.first_name + ' !')
     return redirect(url_for('home.index'))

@@ -17,7 +17,7 @@ def index():
 @auth.login_required
 def new():
     form = OrganisationForm()
-    return render_template("organisation_form.html", form=form, title="New Organisation")
+    return render_template("organisation_form.html", form=form, title="New Organisation", edit=False)
 
 @orgs.route('/organisations/edit/<int:id>')
 @auth.login_required
@@ -33,7 +33,7 @@ def edit(id):
         form.postal_code.data = org_address.postal_code
         form.country.data = org_address.country
 
-        return render_template('organisation_form.html', form=form, title="Edit " + org.name)
+        return render_template('organisation_form.html', form=form, title="Edit " + org.name, edit=True)
     else:
         error = 'Not allowed to edit this organisation'
         return to_403(error)
@@ -41,40 +41,54 @@ def edit(id):
 @orgs.route("/organisations/save", methods=['POST'])
 @auth.login_required
 def save():
+    '''
+    Save a new or an existing organisation
+    :return: User's organisations home page
+    '''
     form = OrganisationForm()
     if form.validate_on_submit():
         # check if user is trying to edit
         id = request.form['id']
-        new = id is None
+        new = id == "-1"
         user_can_edit = not new and user_has_rights(id)
 
-        organisation = None
-        address = None
-
-        if user_can_edit:
-            organisation = Organisation.query.get_or_404(id)
-            address = organisation.addresses.first()
-        elif not user_can_edit:
+        if not new and not user_has_rights(id):
             error = "Not allowed to edit this organisation"
             return to_403(error)
 
-        organisation.name = request.form['name']
-        organisation.manager_name = ['manager_name']
-
+        # Create/get organisation
         if new:
+            organisation = Organisation(
+                name= request.form['name'],
+                manager_name=request.form['manager_name']
+            )
             organisation.users.append(g.user)
             db.session.add(organisation)
-        db.session.commit()
-
-        address.address = request.form['address']
-        address.city = request.form['city']
-        address.province = request.form['province']
-        address.country = request.form['country']
-        address.postal_code = request.form['postal_code']
-        address.organisation_id = organisation.id
+            db.session.commit()
+        else:
+            organisation = Organisation.query.get_or_404(id)
+            organisation.name = request.form['name']
+            organisation.manager_name = request.form['manager_name']
 
         if new:
+            address = Address(
+                address=request.form['address'],
+                city=request.form['city'],
+                province=request.form['province'],
+                country=request.form['country'],
+                postal_code=request.form['postal_code'],
+                organisation_id=organisation.id
+            )
             db.session.add(address)
+        else:
+            address = organisation.addresses.first()
+            address.address = request.form['address']
+            address.city = request.form['city']
+            address.province = request.form['province']
+            address.country = request.form['country']
+            address.postal_code = request.form['postal_code']
+            address.organisation_id = organisation.id
+
         db.session.commit()
 
         flash(organisation.name + " has been saved")
