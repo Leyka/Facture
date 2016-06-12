@@ -53,12 +53,12 @@
   {% if messages %}
     <section id="notification" class="success">
           {% for message in messages %}
-            <p class="flash">{{ message }} <a href="#" class="float-right close"><i class="ion-close-circled"></i></a></p>
+            <p class="flash">{{ message }} <a href="#" class="close"><i class="ion-close-circled"></i></a></p>
           {% endfor %}
     </section>
   {% elif error %}
     <section id="notification" class="error">
-      <p class="error">{{ error }} <a href="#" class="float-right close"><i class="ion-close-circled"></i></a></p>
+      <p class="error">{{ error }} <a href="#" class="close"><i class="ion-close-circled"></i></a></p>
     </section>
   {% endif %}
 {% endwith %}
