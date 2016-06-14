@@ -25,7 +25,7 @@ def edit(id):
     if user_has_rights(id):
         org = Organisation.query.get_or_404(id)
         form = OrganisationForm(obj=org)
-        org_address = org.addresses.first()
+        org_address = org.addresses.first_or_404()
 
         form.address.data = org_address.address
         form.city.data = org_address.city
